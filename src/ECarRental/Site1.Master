@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="ECarRental.fontawesome.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Go Now Car Rentals</title>
+    <%--Datatables css--%>
+    <link href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+    <%--JQuery script--%>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <%--Datatables script--%>
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+
+    <%--Bootstrap script--%>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <%--Footer css--%>
+    <link href="css/customstylesheet.css" rel="stylesheet" />
+    <%-- Bootstrap css --%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <%-- Datatables css  --%>
+    <%-- <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />--%>
+    <%--Fontawesome css--%>
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+
+    <%--Fontawesome script--%>
+    <script src="fontawesome/js/all.js"></script>
+
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <%--Header--%>
+        <div class="container">
+            <nav class="navbar  navbar-expand-lg navbar-light">
+                <div class="d-flex align-items-center">
+
+                    <asp:LinkButton ID="LinkButton3" class="navbar-brand ms-3" runat="server" OnClick="LinkButton3_Click">
+                   <i class="fab fa-grunt fa-3x text-danger"> </i>  
+                    </asp:LinkButton>
+                    <span>Go <span class="text-danger">Now</span> </span>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Home.aspx">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Product.aspx">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#AboutUs">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#ContactUs">Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav me-3 text-center">
+                        <li class="nav-item active">
+                            <asp:LinkButton class="btn btn-light" ID="LinkButton1" runat="server"><i class="fas fa-user"></i></asp:LinkButton>
+                        </li>
+                        <li class="nav-item">
+                            <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <%--Main Content--%>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <%-- ! Main Content--%>
+
+
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="#" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none 1h-1"><i class="fab fa-grunt text-danger fa-3x"></i></a>
+                    <span class="text-muted">© 2021 Go <span class="text-danger">Now</span></span>
+                </div>
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fab fa-twitter fa-1x"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fab fa-instagram fa-1x"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fab fa-facebook fa-1x"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
