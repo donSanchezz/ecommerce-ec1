@@ -61,13 +61,13 @@
                             <a class="nav-link active" aria-current="page" href="Home.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Product.aspx">Products</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#AboutUs">About Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#ContactUs">Contact Us</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="Product.aspx">Products</a>
                         </li>
                     </ul>
 

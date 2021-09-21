@@ -12,7 +12,7 @@
         <div class="row">
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:carrentalConnectionString %>" SelectCommand="SELECT * FROM [cars]"></asp:SqlDataSource>
            <div class="col">
-               <asp:GridView ID="GridView1" runat="server" class="table table-striped table-bordered" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSource1">
+               <asp:GridView ID="GridView1" runat="server" class="table table-striped table-bordered" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                    <Columns>
                        <asp:BoundField DataField="id" HeaderText="ID" ReadOnly="True" SortExpression="id" />
                        
@@ -54,6 +54,15 @@
                                                
                                           </div>
                                        </div>
+
+                                       <div class="row">
+                                           <div class="col-12">
+                                               
+                                               <asp:Button class="btn btn-primary mt-2" runat="server" Text="Add to Cart" />
+                                               
+                                          </div>
+                                       </div>
+
 
 
 

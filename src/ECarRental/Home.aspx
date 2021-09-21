@@ -51,32 +51,71 @@
     <section class="mt-2" id="AboutUs">
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col mt-2">
-                            <center>
-                                <h4>About Us</h4>
-                            </center>
-                        </div>
-                    </div>
 
+                <div class="row">
+                    <div class="col mt-2">
+                        <center>
+                            <h4>About Us</h4>
+                        </center>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+
+                <div class="col-md-5">
                     <div class="row">
                         <div class="col">
-                            <hr />
+                            <h5>Who We Are</h5>
+
                         </div>
+
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            Welcome. It's great that you're thinking about using our service. But first, you should learn a little about who we are and what we stand for. Go Now Rentals is a family-owned, world-class car rental service. We operate a island wide network that covers  all 14 parishes, nearly 150  dedicated team members, and nearly 400 vehicles taking customers wherever they need to go. In any way you want to think about it, we lead the transportation service industry.How did we get here? The fact is, we owe our success to each and every one of our people. That's why we empower everyone on our team with opportunities for growth. Our mission, along with our uncompromising commitment to customers, has made Go Now a genuine success story and a truly special place to work.
                         </div>
 
                     </div>
+
+
 
 
                 </div>
-                <div class="col-md-6 d-flex justify-content-center">
-                    <img class="svg-img mt-3" src="imgs/team.svg" alt="team" />
+                <div class="col-md-7">
+
+                    <div class="row">
+                        <div class="col">
+                            <h5>Our Mission</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <img src="imgs/world.svg" alt="globe" width="200" height="130" />
+                            <h5>To be the best transportation service provider on the island.</h5>
+
+                        </div>
+
+                        <div class="col">
+                            <img src="imgs/review.svg" alt="review" width="200" height="130" />
+                            <h5>To exceed our customers’ expectations for service, quality and value.</h5>
+
+                        </div>
+
+                        <div class="col">
+                            <img src="imgs/workspace.svg" alt="workspace" width="200" height="130" />
+                            <h5>To provide our employees with a great place to work.</h5>
+
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
