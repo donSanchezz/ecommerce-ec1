@@ -1727,7 +1727,10 @@
     <Content Include="imgs\img-2.jpg" />
     <Content Include="imgs\img-3.jpg" />
     <Content Include="imgs\img-4.jpg" />
+    <Content Include="imgs\review.svg" />
     <Content Include="imgs\team.svg" />
+    <Content Include="imgs\workspace.svg" />
+    <Content Include="imgs\world.svg" />
     <Content Include="Product.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
