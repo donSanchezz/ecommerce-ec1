@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Cart.aspx" />
     <Content Include="car_inv\equinox.jpg" />
     <Content Include="car_inv\swift.jpg" />
     <Content Include="car_inv\tiida.jpg" />
@@ -1731,10 +1732,18 @@
     <Content Include="imgs\team.svg" />
     <Content Include="imgs\workspace.svg" />
     <Content Include="imgs\world.svg" />
+    <Content Include="Global.asax" />
     <Content Include="Product.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart.aspx.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cart.aspx.designer.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1742,6 +1751,10 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

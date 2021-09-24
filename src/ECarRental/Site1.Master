@@ -61,10 +61,10 @@
                             <a class="nav-link active" aria-current="page" href="Home.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#AboutUs">About Us</a>
+                            <a class="nav-link" href="#AboutUs">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#ContactUs">Contact Us</a>
+                            <a class="nav-link" href="#ContactUs">Contact</a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link" href="Product.aspx">Products</a>
@@ -76,7 +76,7 @@
                             <asp:LinkButton class="btn btn-light" ID="LinkButton1" runat="server"><i class="fas fa-user"></i></asp:LinkButton>
                         </li>
                         <li class="nav-item">
-                            <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
+                            <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server" PostBackUrl="~/Cart.aspx"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
                         </li>
                     </ul>
                 </div>
