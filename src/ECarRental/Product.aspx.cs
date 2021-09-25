@@ -16,7 +16,7 @@ namespace ECarRental
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -44,11 +44,14 @@ namespace ECarRental
             if (Global.Vehicles.Find(x => x.Id == newVeh.Id) == null)
             {
                 Global.Vehicles.Add(newVeh);
-                Global.totals.Add(index, newPrice);
+                Global.totals.Add(newPrice);
+                Global.quantity.Add(1);
+                this.ClientScript.RegisterStartupScript(this.GetType(), "Success", "swal('Item Added!', 'This item has been added to your cart', 'success');", true);
             }
             else
             {
-                Response.Redirect("Product.aspx");
+                this.ClientScript.RegisterStartupScript(this.GetType(), "Error", "swal('Oops!', 'This item already belongs to your cart', 'error');", true);
+
             }
 
 

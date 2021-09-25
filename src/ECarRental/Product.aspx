@@ -59,7 +59,7 @@
                                        <div class="row">
                                            <div class="col-12">
                                                
-                                               <asp:Button class="btn btn-primary mt-2" runat="server" ID="Button1" Text="Add to Cart" OnClick="Button1_Click" />
+                                               <asp:Button class="btn btn-primary mt-2" runat="server" ID="Button1" Text="Add to Cart" OnClick="Button1_Click"/>
                                                
                                           </div>
                                        </div>

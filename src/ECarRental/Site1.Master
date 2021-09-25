@@ -16,7 +16,11 @@
     <script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap5.min.js"></script>
 
 
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css"
+        rel="stylesheet" type="text/css" />
 
+ 
 
     <%--Bootstrap script--%>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>

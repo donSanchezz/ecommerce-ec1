@@ -218,9 +218,10 @@
 
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col">
-                        <button type="button" class="btn btn-warning">APPLY</button>
+                <div class="row  mt-3">
+                    <div class="col-2">
+                      
+                        <asp:Button ID="Button3" class="btn btn-warning  form-control" runat="server" Text="Apply" />
                     </div>
                 </div>
 
@@ -245,7 +246,8 @@
 
                 <div class="row">
                     <div class="col mt-3">
-                        <button type="button" class="btn btn-primary form-control">Checkout</button>
+                        <asp:Button ID="Button2" runat="server" class="btn btn-primary form-control" Text="Checkout" OnClick="Checkout_Click" />
+                       
                     </div>
 
                 </div>

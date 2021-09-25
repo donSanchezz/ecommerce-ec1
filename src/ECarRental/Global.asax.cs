@@ -11,19 +11,21 @@ namespace ECarRental.Model
     {
         //public static List<Vehicle> Vehicles;
         public static List<Vehicle> Vehicles = new List<Vehicle>();
-        public static Dictionary<int, int> map = new Dictionary<int, int>();
-        public static Dictionary<int, int> totals = new Dictionary<int, int>();
-
+        //public static Dictionary<int, int> map = new Dictionary<int, int>();
+        //public static Dictionary<int, int> totals = new Dictionary<int, int>();
+        public static List<int> totals = new List<int>();
+        public static List<int> quantity = new List<int>();
+        public static int CartCleared = 0;
         protected void Application_Start(object sender, EventArgs e)
         {
 
-            
+           
 
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
