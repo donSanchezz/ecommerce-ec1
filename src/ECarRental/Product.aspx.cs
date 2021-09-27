@@ -46,6 +46,7 @@ namespace ECarRental
                 Global.Vehicles.Add(newVeh);
                 Global.totals.Add(newPrice);
                 Global.quantity.Add(1);
+                Session["cart"] = Global.Vehicles;
                 this.ClientScript.RegisterStartupScript(this.GetType(), "Success", "swal('Item Added!', 'This item has been added to your cart', 'success');", true);
             }
             else

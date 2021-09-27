@@ -41,7 +41,7 @@
             document.getElementById("nameLabel").children[0].style.display = "none"
             alert("Test");
         }
-        
+
     </script>
 
 
@@ -80,21 +80,47 @@
                             <a class="nav-link" href="Product.aspx">Products</a>
                         </li>
                     </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="navbar-nav me-3 text-center">
+                                <li class="nav-item dropdown">
+                                    <asp:LinkButton class="btn btn-light nav-link dropdown-toggle" ID="LinkButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server"><i class="fas fa-user"></i></asp:LinkButton>
 
-                    <ul class="navbar-nav me-3 text-center">
-                        <li class="nav-item dropdown">
-                            <asp:LinkButton class="btn btn-light nav-link dropdown-toggle" ID="LinkButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server"><i class="fas fa-user"></i></asp:LinkButton>
+                                    <ul class="dropdown-menu" aria-labelledby="LinkButton1">
 
-                            <ul class="dropdown-menu" aria-labelledby="LinkButton1">
-                                <li id="nameLabel"><asp:Label ID="Name" runat="server" Text="Welcome John"></asp:Label></li>
-                                <li><a class="dropdown-item" href="Login.aspx">Login</a></li>
-                                <li><a class="dropdown-item" href="Register.aspx">Register</a></li>
+                                        <li><a class="dropdown-item" href="Login.aspx">Login</a></li>
+                                        <li><a class="dropdown-item" href="Register.aspx">Register</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server" PostBackUrl="~/Cart.aspx"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
+                                </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server" PostBackUrl="~/Cart.aspx"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
-                        </li>
-                    </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="navbar-nav me-3 text-center">
+                                <li class="nav-item">
+                                    <a runat="server" class="nav-link text-decoration-none text-muted" href="#" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %></a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <asp:LinkButton class="btn btn-light nav-link dropdown-toggle" ID="LinkButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server"><i class="fas fa-user"></i></asp:LinkButton>
+
+                                    <ul class="dropdown-menu" aria-labelledby="LinkButton1">
+                                        <li>
+                                            <asp:LoginStatus runat="server" class="nav-link text-decoration-none text-muted"  LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="btn btn-light" ID="LinkButton2" runat="server" PostBackUrl="~/Cart.aspx"><i class="fas fa-shopping-cart"></i></asp:LinkButton>
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+
+
+
+
                 </div>
             </nav>
         </div>

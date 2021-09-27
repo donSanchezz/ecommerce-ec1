@@ -13,17 +13,70 @@ namespace ECarRental.fontawesome
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "Func()", true);
+        private const string AntiXsrfTokenKey = "__AntiXsrfToken";
+        private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
+        private string _antiXsrfTokenValue;
 
-            if (IsPostBack)
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            // The code below helps to protect against XSRF attacks
+            var requestCookie = Request.Cookies[AntiXsrfTokenKey];
+            Guid requestCookieGuidValue;
+            if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
             {
-                Name.Text = Context.User.Identity.GetUserName();
+                // Use the Anti-XSRF token from the cookie
+                _antiXsrfTokenValue = requestCookie.Value;
+                Page.ViewStateUserKey = _antiXsrfTokenValue;
+            }
+            else
+            {
+                // Generate a new Anti-XSRF token and save to the cookie
+                _antiXsrfTokenValue = Guid.NewGuid().ToString("N");
+                Page.ViewStateUserKey = _antiXsrfTokenValue;
+
+                var responseCookie = new HttpCookie(AntiXsrfTokenKey)
+                {
+                    HttpOnly = true,
+                    Value = _antiXsrfTokenValue
+                };
+                if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
+                {
+                    responseCookie.Secure = true;
+                }
+                Response.Cookies.Set(responseCookie);
             }
 
-           
+            Page.PreLoad += master_Page_PreLoad;
+        }
 
+        protected void master_Page_PreLoad(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                // Set Anti-XSRF token
+                ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
+                ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
+            }
+            else
+            {
+                // Validate the Anti-XSRF token
+                if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
+                    || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
+                {
+                    throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
+                }
+            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Response.Redirect("Home.aspx");
         }
 
         protected void LinkButton3_Click(object sender, EventArgs e)

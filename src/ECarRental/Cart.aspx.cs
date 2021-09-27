@@ -14,7 +14,7 @@ namespace ECarRental
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            Session["cart"] = Global.Vehicles;
+            //Session["cart"] = Global.Vehicles;
             List<Vehicle> vehicles = new List<Vehicle>();
             vehicles = (List<Vehicle>)Session["cart"];
 
