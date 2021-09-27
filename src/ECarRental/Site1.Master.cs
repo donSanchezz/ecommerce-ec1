@@ -1,9 +1,13 @@
-﻿using System;
+﻿using ECarRental.Model;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 namespace ECarRental.fontawesome
 {
@@ -11,6 +15,14 @@ namespace ECarRental.fontawesome
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "Func()", true);
+
+            if (IsPostBack)
+            {
+                Name.Text = Context.User.Identity.GetUserName();
+            }
+
+           
 
         }
 
