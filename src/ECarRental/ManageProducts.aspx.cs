@@ -1,4 +1,6 @@
 ﻿using ECarRental.Model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +18,17 @@ namespace ECarRental
         public static string prevFilename = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = Context.User.Identity.GetUserId();
 
+            if (!Context.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
+            if (!manager.IsInRole(userId, "Admin"))
+            {
+                Response.Redirect("~/Home.aspx");
+            }
         }
 
         protected void Delete_Clicked(object sender, EventArgs e)

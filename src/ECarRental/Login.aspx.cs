@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ECarRental.Model;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace ECarRental
@@ -16,15 +17,10 @@ namespace ECarRental
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //RegisterHyperLink.NavigateUrl = "Register";
-            //// Enable this once you have account confirmation enabled for password reset functionality
-            ////ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            //if (!String.IsNullOrEmpty(returnUrl))
-            //{
-            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            //}
+            if (Context.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -34,12 +30,13 @@ namespace ECarRental
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
+ 
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 ApplicationUser signedUser = manager.FindByEmail(Email.Text);
                 var result = signinManager.PasswordSignIn(signedUser.UserName, Password.Text, RememberMe.Checked, shouldLockout: false);
-
+                //manager.AddToRole(signedUser.Id, "Admin");
+                //manager.RemoveFromRole(signedUser.Id, "Admin");
 
                 switch (result)
                 {

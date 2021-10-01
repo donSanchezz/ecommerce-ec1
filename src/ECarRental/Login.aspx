@@ -43,7 +43,7 @@
                                     <asp:Label runat="server" AssociatedControlID="Email" class="col-md-2 control-label">Email</asp:Label>
                                     <div class="col-md">
                                         <asp:TextBox runat="server" ID="Email" class="form-control" TextMode="Email" />
-                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
+                                        <asp:RequiredFieldValidator  ValidationGroup="Login" runat="server" ControlToValidate="Email"
                                             class="text-danger" ErrorMessage="The email field is required." />
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                     <asp:Label runat="server" AssociatedControlID="Password" class="col-md-2 control-label">Password</asp:Label>
                                     <div class="col-md">
                                         <asp:TextBox runat="server" ID="Password" TextMode="Password" class="form-control" />
-                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" class="text-danger" ErrorMessage="The password field is required." />
+                                        <asp:RequiredFieldValidator runat="server" ValidationGroup="Login" ControlToValidate="Password" class="text-danger" ErrorMessage="The password field is required." />
                                     </div>
                                 </div>
 
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group mt-2">
                                     <div class="col-md-offset-2 col-md">
-                                        <asp:Button runat="server" OnClick="LogIn"  class="form-control btn btn-success btn-lg" Text="Log in" />
+                                        <asp:Button runat="server" OnClick="LogIn" ValidationGroup="Login" class="form-control btn btn-success btn-lg" Text="Log in" />
                                     </div>
                                 </div>
 

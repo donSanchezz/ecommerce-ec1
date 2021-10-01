@@ -98,7 +98,7 @@ namespace ECarRental.fontawesome
                 List<Vehicle> vehicles = new List<Vehicle>();
                 vehicles = (List<Vehicle>)Session["cart"];
 
-                try
+                if (vehicles != null)
                 {
                     for (int i = 0; i < vehicles.Count; i++)
                     {
@@ -129,21 +129,17 @@ namespace ECarRental.fontawesome
                             {
                                 cmd.Parameters.AddWithValue("@prevTotal", reader.GetInt32(4));
                                 Console.Write(reader.GetInt32(4));
-                            }  
+                            }
                             cmd.Parameters.AddWithValue("@quantity", Global.quantity[i]);
                             cmd.Parameters.AddWithValue("@total", Global.totals[i]);
-                            
 
-                            
+
+
 
                             cmd.ExecuteNonQuery();
                             reader.Close();
                         }
                     }
-                }
-                catch (NullReferenceException ex)
-                {
-                    Response.Write(ex);
                 }
 
             }

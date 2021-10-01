@@ -1,5 +1,6 @@
 ﻿using ECarRental.Model;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,8 +17,14 @@ namespace ECarRental
       
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = Context.User.Identity.GetUserId();
+
+            if (!manager.IsInRole(userId, "Customer") || !manager.IsInRole(userId, "Admin"))
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
             //Session["cart"] = Global.Vehicles;
             List<Vehicle> vehicles = new List<Vehicle>();
             vehicles = (List<Vehicle>)Session["cart"];

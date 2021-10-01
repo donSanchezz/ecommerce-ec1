@@ -22,7 +22,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col-md-5">
@@ -106,12 +106,12 @@
                         <div class="row mt-2">
                             <div class="col">
                                 <div class="form-group">
-                                     <label for="" class="form-label">Image Upload</label>
+                                    <label for="" class="form-label">Image Upload</label>
                                     <asp:FileUpload ID="FileUpload1" onchange="readURL (this);" class="form-control" runat="server" />
                                     <asp:RequiredFieldValidator ValidationGroup="Add" runat="server" ControlToValidate="FileUpload1"
-                                    class="text-danger" ErrorMessage="An image is required." />
+                                        class="text-danger" ErrorMessage="An image is required." />
                                 </div>
-                                
+
                             </div>
                         </div>
 
