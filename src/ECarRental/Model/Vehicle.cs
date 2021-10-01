@@ -7,6 +7,11 @@ namespace ECarRental.Model
 {
     public class Vehicle
     {
+
+        public Vehicle()
+        {
+        }
+
         public Vehicle(int id, string name, string description, int price, string category, string image)
         {
             Id = id;

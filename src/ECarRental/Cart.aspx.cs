@@ -1,6 +1,9 @@
 ﻿using ECarRental.Model;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,6 +16,7 @@ namespace ECarRental
       
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             
             //Session["cart"] = Global.Vehicles;
             List<Vehicle> vehicles = new List<Vehicle>();
@@ -37,11 +41,6 @@ namespace ECarRental
                     Global.CartCleared = 0;
                 }
             
-
-            
-
-            
-
             //Looping through the Grid View and Assigning the Count value and Total value
             for (int i = 0; i < count; i++)
             {
@@ -120,6 +119,32 @@ namespace ECarRental
             //Retrieve Vehicle's index in the gloval variabls vehicles, based on the row that was selected via button
             int index1 = Global.Vehicles.FindIndex(x => x.Id == id);
 
+            try
+            {
+                //Create a sql connection
+                SqlConnection con = new SqlConnection(Global.strcon);
+                //Check if the connection is open, if not, then open it.
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Delete from cart where userId=@userId AND carId=@carId", con);
+
+                    cmd.Parameters.AddWithValue("@userId", Context.User.Identity.GetUserId());
+                    cmd.Parameters.AddWithValue("@carId", Global.Vehicles[index1].Id);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             //Remove items from Vehicles and Total
             Global.Vehicles.RemoveAt(index1);
@@ -154,10 +179,12 @@ namespace ECarRental
             Label5.Text = subTotal.ToString();
         }
 
-        protected void CalGrandTotal()
+        protected int  CalGrandTotal()
         {
             string val = DropDownList1.SelectedValue;
-            Label6.Text = (Int32.Parse(Label5.Text) + Int32.Parse(val)).ToString();
+            int grandTotal = (Int32.Parse(Label5.Text) + Int32.Parse(val));
+            Label6.Text = grandTotal.ToString();
+            return grandTotal;
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,24 +194,88 @@ namespace ECarRental
 
         protected void Checkout_Click(object sender, EventArgs e)
         {
+            Random rnd = new Random();
+            DateTime aDate = DateTime.UtcNow;
+            int orderId = aDate.Millisecond + rnd.Next(0,50);
 
-            if (Global.Vehicles.Count != 0)
+
+
+            if (Context.User.Identity.IsAuthenticated)
             {
-                //Setting this variable to true so when the page is reloaded it checks and displays a cart was cleared message
-                Global.CartCleared = 1;
+                try
+                {
+                    //Create a sql connection
+                    SqlConnection con = new SqlConnection(Global.strcon);
+                    //Check if the connection is open, if not, then open it.
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    //Insert the order details information
+                    try
+                    {
+                        SqlCommand order = new SqlCommand("INSERT INTO [order](OrderId, Username, UserId, DateTime, Subtotal) values(@orderId, @username, @userId, @dateTime, @subtotal)", con);
+                        order.Parameters.AddWithValue("@orderId", orderId);
+                        order.Parameters.AddWithValue("@username", Context.User.Identity.GetUserName());
+                        order.Parameters.AddWithValue("@userId", Context.User.Identity.GetUserId());
+                        order.Parameters.AddWithValue("@dateTime", aDate);
+                        order.Parameters.AddWithValue("@subtotal", CalGrandTotal());
+                        order.ExecuteNonQuery();
 
-                //Clears all the global variables and empties the cart
-                Global.Vehicles.Clear();
-                Global.quantity.Clear();
-                Global.totals.Clear();
+                        
+                        for (int i = 0; i < Global.Vehicles.Count; i++)
+                        {
+                            SqlCommand orderDetails = new SqlCommand("INSERT INTO order_details(OrderId, ProductId, Quantity) values(@orderId, @productId, @quantity)", con);
+                            orderDetails.Parameters.AddWithValue("@orderId", orderId);
+                            orderDetails.Parameters.AddWithValue("@productId", Global.Vehicles[i].Id);
+                            orderDetails.Parameters.AddWithValue("@quantity", Global.quantity[i]);
+                            orderDetails.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    //Clear the users cart afterwards
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand("Delete from cart where userId=@userId", con);
+
+                        cmd.Parameters.AddWithValue("@userId", Context.User.Identity.GetUserId());
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+
+                if (Global.Vehicles.Count != 0)
+                {
+                    //Setting this variable to true so when the page is reloaded it checks and displays a cart was cleared message
+                    Global.CartCleared = 1;
+
+                    //Clears all the global variables and empties the cart
+                    Global.Vehicles.Clear();
+                    Global.quantity.Clear();
+                    Global.totals.Clear();
+                }
+                else
+                {
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "Error", "swal('Empty Cart!', 'Your cart is empty, go back and continue shopping', 'error');", true);
+                }
+
+
+                Response.Redirect(Request.RawUrl);
+
             }
-            else
-            {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "Error", "swal('Empty Cart!', 'Your cart is empty, go back and continue shopping', 'error');", true);
-            }
 
 
-            Response.Redirect(Request.RawUrl);
 
 
         }

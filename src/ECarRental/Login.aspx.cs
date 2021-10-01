@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -36,12 +38,70 @@ namespace ECarRental
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 ApplicationUser signedUser = manager.FindByEmail(Email.Text);
-                var result = signinManager.PasswordSignIn(signedUser.UserName, Password.Text,RememberMe.Checked, shouldLockout: false);
-                
+                var result = signinManager.PasswordSignIn(signedUser.UserName, Password.Text, RememberMe.Checked, shouldLockout: false);
+
 
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        try
+                        {
+                            //Create a sql connection
+                            SqlConnection con = new SqlConnection(Global.strcon);
+                            //Check if the connection is open, if not, then open it.
+                            if (con.State == ConnectionState.Closed)
+                            {
+                                con.Open();
+                            }
+
+                            //Creating the sql statement
+
+
+                            //Getting the items in the cart from the Session variable
+                            
+
+
+
+
+                            SqlCommand cmd = new SqlCommand("Select * from cart where userId=@Id ", con);
+                            cmd.Parameters.AddWithValue("@Id", signedUser.Id);
+                            SqlDataReader reader = cmd.ExecuteReader();
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    Global.quantity.Add(reader.GetInt32(3));
+                                    Global.totals.Add(reader.GetInt32(4));
+                                    SqlCommand prodInfo = new SqlCommand("Select * from cars where Id=@Id ", con);
+                                    prodInfo.Parameters.AddWithValue("@Id", reader.GetInt32(2));
+                                    SqlDataReader newReader = prodInfo.ExecuteReader();
+                                    if (newReader.HasRows)
+                                    {
+                                        while (newReader.Read())
+                                        {
+                                            Vehicle veh = new Vehicle(newReader.GetInt32(0), newReader.GetString(1), newReader.GetString(2), newReader.GetInt32(4), newReader.GetString(3), newReader.GetString(5));
+                                            Global.Vehicles.Add(veh);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No rows found.");
+                                    }
+                                    Session["cart"] = Global.Vehicles;
+                                    newReader.Close();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No rows found.");
+                            }
+                            reader.Close();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Response.Write(ex);
+                        }
                         Response.Redirect("Home.aspx");
                         break;
                     case SignInStatus.LockedOut:
